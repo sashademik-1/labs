@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cmath>
+#include <ios>
+#include <iomanip>
+int main()
+{ int x;
+std::cout<< "Helloo, Enter x value: ";
+std::cin>>x;
+pow(x,5)-2*pow(x,3)+5;
+std::cout << std::fixed << std::setprecision(4) << "result is" pow(x,5)-2*pow(x,3)+5 << std::endl;
+
+int unsigned a;
+std::cout<<"Enter a value:";
+std::cin>>a;
+std::cout << std::showpos << "result is"3*abs(a)+sqrt(a+2) << std::endl;
+
+bool k,l,m,n,o;
+std::cout << "Enter k value: ";
+std::cin >> k;
+std::cout << "Enter l value: ";
+std::cin >> l;
+std::cout << "Enter m value: ";
+std::cin >> m;
+std::cout << "Enter n value: ";
+std::cin>>n;
+o=n&&(!m)||!(l^k);
+if(o==1)
+std::cout<<"true"<<std::endl;
+else
+std::cout<<"false"<<std::endl;
+
+unsigned short int b;
+unsigned int p;
+std::cout<< "Enter b value:";
+std::cin>>b;
+if (b<=7)
+p=pow(2,b);
+std::cout << std::oct << "result is"p << "  " << std::dec << "result is"p <<std::endl
+
+unsigned short int c,d,e,f;
+std::cout << "Enter c value: ";
+std::cin >> c;
+std::cout << "Enter d value: ";
+std::cin >> d;
+std::cout << "Enter e value: ";
+std::cin >> e;
+std::cout << "Enter f value: ";
+std::cin >> f;
+std::hex; std::internal; std::setfill(0);
+std::cout << f|(~e)&(c^(~d)) <<std::endl;
+
+return 0;
+}
