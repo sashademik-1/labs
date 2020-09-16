@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cmath>
+int fact(int N){
+if(N<0) return 0;
+if(N==0) return 1;
+else return N*fact(N-1); }
+int main()
+{
+char q=0;
+for (int i=0; i<=255; ++i)                                      //1
+{std::cout << q << std::endl;
+q++;}
+std::cout <<"Vedite symbol" << std::endl;                       //2
+char w=0;
+std::cin>>w;
+if((w<=57)&&(w>=48))
+std::cout <<"digit"<< std::endl;
+else if (((w>=65) && (w<=90))||((w>=97)&&(w<=122)))
+std::cout <<"bukva"<< std::endl;
+else std::cout<< "symbol neizvesten" << std::endl;
+unsigned int k;                                                 //3
+std::cout<<"Vedite x"<< std::endl;
+std::cin>>k;
+double r;
+int t=k % 5;
+switch(t)
+{ case 0: r=1; break;
+  case 1:  r=1-k; break;
+  case 2:  r=1/k; break;
+  case 3:  r=k; break;
+  case 4:  r=pow(k,2); break;       
+ }   
+std::cout<< r << std::endl;
+//4
+std::cout<<"Vedite x"<<std::endl;
+double x,y,h,u=1.0;
+std::cin>>x;
+int N;
+const double e=2.718281;
+y=pow(e,x);
+for(int i=-2; i>=-6;--i){N=0; h=1.0*x;
+    while 
+
+       
+
+
+        return 0;
+    
+}
