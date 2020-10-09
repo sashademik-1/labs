@@ -1,76 +1,79 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-int fact(int N){
-double fact(int N){if(N<0) return 0; if(N==0) return 1; else return N*fact(N-1);}
-int main()
-{
-char q=0;
-for (int i=0; i<=255; ++i)                                      //1
-{std::cout << q << std::endl;
-q++;}
-std::cout <<"Vedite symbol" << std::endl;                       //2
-char w=0;
-std::cin>>w;
-if((w<=57)&&(w>=48))
-std::cout <<"digit"<< std::endl;
-else if (((w>=65) && (w<=90))||((w>=97)&&(w<=122)))
-std::cout <<"bukva"<< std::endl;
-else std::cout<< "symbol neizvesten" << std::endl;
-unsigned int k;                                                 //3
-std::cout<<"Vedite x"<< std::endl;
-std::cin>>k;
-double r;
-int t=k % 5;
-switch(t)
-{ case 0: r=1; break;
-  case 1:  r=1-k; break;
-  case 2:  r=1/k; break;
-  case 3:  r=k; break;
-  case 4:  r=pow(k,2); break;       
- }   
-std::cout<< r << std::endl;
-//4
-int x;
-    long double e=2.7182818284;
-    double y=0;//double y=1.+x
-    std::cout<<"vvedite x";
-    std::cin>>x;
-    int m=0;
-    do
+double fact(int n)
+{ int res=1;
+    for(int i=1;i<=n;++i)
+    {res*=i;}
+    return res;}
+    int main()
     {
-        y+=(pow(x,m))/fact(m);
-        ++m;
-         if (pow(e,x)-y<=1e-6)
+        for (int i=32; i<=255; ++i)                                      //1
         {
-            std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
-            std::cout<<"kol-vo interatci pri e=1e-6:"<<m<<std::endl;
-
+            std::cout <<i<<". "<<static_cast<char>(i)  << std::endl;
+            ++i;
         }
-        else if (pow(e,x)-y<=1e-5)
+        std::cout <<"Vedite symbol" << std::endl;                       //2
+        char w=0;
+        std::cin>>w;
+        if((w<=57)&&(w>=48))
+            std::cout <<"digit"<< std::endl;
+        else if (((w>=65) && (w<=90))||((w>=97)&&(w<=122)))
+            std::cout <<"bukva"<< std::endl;
+        else std::cout<< "symbol neizvesten" << std::endl;
+        unsigned int k;                                                 //3
+        std::cout<<"Vedite x"<< std::endl;
+        std::cin>>k;
+        double r;
+        int t=k % 5;
+        switch(t)
+        { case 0: r=1; break;
+            case 1:  r=1-k; break;
+            case 2:  r=1/k; break;
+            case 3:  r=k; break;
+            case 4:  r=pow(k,2); break;
+        }
+        std::cout<< r << std::endl;
+//4
+        int x;
+        double y=0;//double y=1.+x
+        std::cout<<"vvedite x";
+        std::cin>>x;
+        int m=0;
+        do
         {
-            std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
-            std::cout<<"kol-vo interatci pri e=1e-5:"<<m<<std::endl;
+            y+=(pow(x,m))/fact(m);
+            ++m;
+            if (pow(M_E,x)-y<=1e-6)
+            {
+                std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
+                std::cout<<"kol-vo interatci pri e=1e-6:"<<m<<std::endl;
+
+            }
+            else if (pow(M_E,x)-y<=1e-5)
+            {
+                std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
+                std::cout<<"kol-vo interatci pri e=1e-5:"<<m<<std::endl;
+
+            }
+            else if (pow(M_E,x)-y<=1e-4)
+            {
+                std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
+                std::cout<<"kol-vo interatci pri e=1e-4:"<<m<<std::endl;
+
+            }
+            else if (pow(M_E, x) - y <=1e-3) {
+                std::cout << std::fixed << std::setprecision(8) << y << std::endl;
+                std::cout << "kol-vo interatci pri e=1e-3:" << m << std::endl;
+            }
+            else if (pow(M_E, x) - y <= 1e-2) {
+                std::cout << std::fixed << std::setprecision(8) << y << std::endl;
+                std::cout << "kol-vo interatci pri e=1e-2:" << m << std::endl;}
 
         }
-        else if (pow(e,x)-y<=1e-4)
-        {
-            std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
-            std::cout<<"kol-vo interatci pri e=1e-4:"<<m<<std::endl;
-
-        }
-        else if (pow(e, x) - y <=1e-3) {
-            std::cout << std::fixed << std::setprecision(8) << y << std::endl;
-            std::cout << "kol-vo interatci pri e=1e-3:" << m << std::endl;
-        }
-        else if (pow(e, x) - y <= 1e-2) {
-            std::cout << std::fixed << std::setprecision(8) << y << std::endl;
-            std::cout << "kol-vo interatci pri e=1e-2:" << m << std::endl;}
-
+        while ((pow(M_E,x)-y)>=1e-6);
+        std::cout<<"kol-vo interatci :"<<m<<std::endl;
+        std::cout<<std::fixed<<std::setprecision(8)<<pow(M_E,x)<<std::endl;;
+        std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
+        return 0;
     }
-    while ((pow(e,x)-y)>=1e-6);
-    std::cout<<"kol-vo interatci :"<<m<<std::endl;
-    std::cout<<std::fixed<<std::setprecision(8)<<pow(e,x)<<std::endl;;
-    std::cout<<std::fixed<<std::setprecision(8)<<y<<std::endl;
-        return 0; 
-}
