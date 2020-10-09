@@ -17,7 +17,7 @@ double fact(int n)
         char w=0;
         std::cin>>w;
         if((w<=57)&&(w>=48))
-            std::cout <<"digit"<< std::endl;
+            std::cout <<"tsifra"<< std::endl;
         else if (((w>=65) && (w<=90))||((w>=97)&&(w<=122)))
             std::cout <<"bukva"<< std::endl;
         else std::cout<< "symbol neizvesten" << std::endl;
