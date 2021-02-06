@@ -3,11 +3,11 @@ struct Node
 {
     Node *pNext = nullptr;
     int data = 0;
-} node;
+};
 struct Stack
 {
     Node *top;
-} stack;
+};
 Stack &constructor(Stack &is)
 {
     is.top = nullptr;
@@ -35,8 +35,7 @@ void print(const Stack &is)
         }
     }
 }
-Stack &pop(Stack &is)
-
+int pop(Stack &is)
 {
     if (is.top == nullptr)
     {
@@ -45,11 +44,12 @@ Stack &pop(Stack &is)
     else
     {
         Node *point = is.top->pNext;
+        int i = is.top->data;
         std::cout << is.top->data << std::endl;
         delete is.top;
         is.top = point;
+        return i;
     }
-    return is;
 }
 Stack &distrucor(Stack &is)
 {
@@ -76,6 +76,7 @@ unsigned int size(const Stack &is)
         iter = iter->pNext;
     }
     std::cout << "Size: " << length << std::endl;
+    return length;
 }
 int main()
 
