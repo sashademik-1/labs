@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <ostream>
 #include <cstring>
+//while(is){for{Citizen считывать потом создавать нового и добавлять в вектор}
 struct Citizen
 {
     std::string FCs;
@@ -22,6 +23,7 @@ struct Citizen
 };
 std::ostream &operator<<(std::ostream &os, const std::vector<Citizen> &Person) // Запись
 {
+    os << "Citizen in file " << Person.size()<<"\n";
     for (Citizen Person : Person)
         os << "FCs: " << Person.FCs << "\n"
            << "Street: " << Person.way.street << "\n"
@@ -35,13 +37,17 @@ std::ostream &operator<<(std::ostream &os, const std::vector<Citizen> &Person) /
 std::istream &operator>>(std::istream &is, std::vector<Citizen> &Person) // Чтение
 
 {
+    is.ignore(16);
+    std::string str;
+    std::getline(is, str);
+    int i = std::stoi(str);
+    Person.resize(i);
     for (Citizen &Person : Person)
     {
         is.ignore(5);
         std::getline(is, Person.FCs);
         is.ignore(8);
         std::getline(is, Person.way.street);
-        std::string str;
         is.ignore(7);
         std::getline(is, str);
         Person.way.housenumber = std::stoi(str);
@@ -58,42 +64,46 @@ std::istream &operator>>(std::istream &is, std::vector<Citizen> &Person) // Чт
 }
 void ost(const std::vector<Citizen> &Person, std::ofstream &outfile)
 {
+    size_t length = Person.size();
+    outfile.write(reinterpret_cast<char *>(&length), sizeof(size_t));
     for (Citizen Person : Person)
     {
-        size_t length = Person.FCs.length();
+         length = Person.FCs.length();
         outfile.write(reinterpret_cast<char *>(&length), sizeof(size_t));
-        outfile.write(&Person.FCs[0], length);
+        outfile.write(reinterpret_cast<char *>(&Person.FCs), length);
         length = Person.way.street.length();
         outfile.write(reinterpret_cast<char *>(&length), sizeof(size_t));
-        outfile.write(&Person.way.street[0], length);
+        outfile.write(reinterpret_cast<char *>(&Person.way.street), length);
         outfile.write(reinterpret_cast<char *>(&Person.way.housenumber), sizeof(int));
         outfile.write(reinterpret_cast<char *>(&Person.way.flatnumber), sizeof(int));
         length = Person.gender.length();
         outfile.write(reinterpret_cast<char *>(&length), sizeof(size_t));
-        outfile.write(&Person.gender[0], length);
+        outfile.write(reinterpret_cast<char *>(&Person.gender), length);
         outfile.write(reinterpret_cast<char *>(&Person.age), sizeof(int));
     }
 }
-void ifs(std::vector<Citizen> &Person, std::ifstream &infile){
-    for(Citizen Person: Person){
-    size_t length;
-
+void ifs(std::vector<Citizen> &Person, std::ifstream &infile)
+{
+    size_t length = 0;
     infile.read(reinterpret_cast<char *>(&length), sizeof(size_t));
-    Person.FCs.resize(length);
-    infile.read(&Person.FCs[0], length);
+    Person.resize(length);
+    for (Citizen &Person : Person)
+    {
+        infile.read(reinterpret_cast<char *>(&length), sizeof(size_t));
+        Person.FCs.resize(length);
+        infile.read(&Person.FCs[length], length);
 
-    infile.read(reinterpret_cast<char *>(&length), sizeof(size_t));
-    Person.way.street.resize(length);
-    infile.read(&Person.way.street[0], length);
+        infile.read(reinterpret_cast<char *>(&length), sizeof(size_t));
+        Person.way.street.resize(length);
+        infile.read(&Person.way.street[length], length);
 
-    infile.read(reinterpret_cast<char *>(&Person.way.housenumber), sizeof(int));
-    infile.read(reinterpret_cast<char *>(&Person.way.flatnumber), sizeof(int));
+        infile.read(reinterpret_cast<char *>(&Person.way.housenumber), sizeof(int));
+        infile.read(reinterpret_cast<char *>(&Person.way.flatnumber), sizeof(int));
 
-    infile.read(reinterpret_cast<char *>(&length), sizeof(size_t));
-    Person.gender.resize(length);
-    infile.read(&Person.gender[0], length);
-    infile.read(reinterpret_cast<char *>(&Person.age), sizeof(int));
-
+        infile.read(reinterpret_cast<char *>(&length), sizeof(size_t));
+        Person.gender.resize(length);
+        infile.read(&Person.gender[length], length);
+        infile.read(reinterpret_cast<char *>(&Person.age), sizeof(int));
     }
 }
 int main()
@@ -102,7 +112,7 @@ int main()
     int Kolvo = 0;
     std::cin >> Kolvo;
     std::vector<Citizen> Person(Kolvo);
-    std::cin.ignore();
+   std::cin.ignore();
     for (Citizen &Person : Person)
     {
         std::cout << " FCs " << std::endl;
@@ -139,20 +149,28 @@ int main()
             std::cout << Person.FCs << ", " << std::endl;
     }
     std::cout << "---------------" << std::endl;
-    for(Citizen &Person: Person){
+    for (Citizen &Person : Person)
+    {
         std::cout << Person.FCs << std::endl;
     }
     std::ofstream out("text.txt");
-    out << Person <<std::endl;
+    out << Person << std::endl;
     std::ifstream in("text.txt");
     in >> Person;
     std::ofstream out2("text2", std::ios::binary);
     ost(Person, out2);
+    out2.close();
     std::ifstream in2("text2", std::ios::binary);
     ifs(Person, in2);
-    for(Citizen &Person: Person)
-{
-    std::cout << Person.FCs << " " << std::endl;
-}
+    for (Citizen &Person : Person)
+    {
+        std::cout << Person.FCs << std::endl;
+        std::cout << Person.way.street <<  std::endl;
+        std::cout << Person.way.housenumber << std::endl;
+        std::cout << Person.way.flatnumber << std::endl;
+        std::cout << Person.gender <<  std::endl;
+        std::cout << Person.age << std::endl;
+    }
+    in2.close();
     return 0;
 }
