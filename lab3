@@ -93,33 +93,40 @@ int main()
     {cout << i << endl;}
 //zadanie 4
     string str;
-    cout<<"vvedite predlozheni "<< endl;
     cin.ignore(10,'\n');
-    getline(cin,str);
-    cout<<str<<endl;
-    double bukv=0;
-    for( char i : str)
+    cout << "vvedite predlozheni " << endl;
+    getline(cin, str);
+    cout << str << endl;
+    double bukv = 0;
+    cout << "vvedite bukvu" << endl;
+    char bukva;
+    int q = 0;
+    cin >> bukva;
+    for (char i : str)
     {
-        if (((i>=65) && (i<=90))||((i>=97)&&(i<=122)))
+        if (((i >= 65) && (i <= 90)) || ((i >= 97) && (i <= 122)))
             ++bukv;
-
+        if (i==bukva){
+            q++;
+        }
     }
-    cout<<"dolya bikv :"<<bukv/str.length()<<" "<<"dlina stroki :" <<str.length()<<endl;
-    cout<<"vvedite l1 i l2"<<endl;
-    int l1,l2;
-    cin>>l1;
-    cin>>l2;
-    cout<< str.substr(l1,l2-l1)<<endl;
-    string str0=("Can you can a can as a canner can can a can?");
+    cout << "dolya bukvi :" << q / bukv << " "
+         << "dlina stroki :" << str.length() << endl;
+    cout << "vvedite l1 i l2" << endl;
+    int l1, l2;
+    cin >> l1;
+    cin >> l2;
+    cout << str.substr(l1, l2 - l1+1) << endl;
+    string str0 = ("Can you can a can as a canner can can a can?");
     string str1;
-    cout<<"vvedite slovo"<<endl;
-    cin.ignore(10,'\n');
-    getline(cin,str1);
-    str0.replace(str0.find("can?"),3,str1);
-    while ( str0.find("can ")!=-1)
+    cout << "vvedite slovo" << endl;
+    cin.ignore(10, '\n');
+    getline(cin, str1);
+    str0.replace(str0.find("can?"), 3, str1);
+    while (str0.find("can ") != -1)
     {
-        str0.replace(str0.find("can "),3,str1);
+        str0.replace(str0.find("can "), 3, str1);
     }
-    cout << str0<<endl;
+    cout << str0 << endl;
     return 0;
 }
