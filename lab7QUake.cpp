@@ -34,7 +34,7 @@ Quake &push(Quake &is, int data)
 
     return is;
 }
-Quake &pop(Quake &is)
+int pop(Quake &is)
 {
     if (is.top == nullptr)
     {
@@ -44,6 +44,7 @@ Quake &pop(Quake &is)
     {
         Node *point = is.top;
         std::cout << is.top->data << std::endl;
+        int i = is.top->data;
         is.top = is.top->pPrev;
         if (is.top == nullptr)
         {
@@ -55,8 +56,8 @@ Quake &pop(Quake &is)
             is.top->pNext = nullptr;
             delete point;
         }
+        return i;
     }
-    return is;
 }
 void print(const Quake &is)
 {
